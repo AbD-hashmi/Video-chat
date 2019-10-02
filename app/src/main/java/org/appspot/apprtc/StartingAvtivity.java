@@ -29,11 +29,13 @@ public class StartingAvtivity extends AppCompatActivity {
     ArrayList arrayList;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    int otp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_starting_avtivity);
 
+        setContentView(R.layout.activity_starting_avtivity);
+        setTitle("Sign In");
         button=findViewById(R.id.button);
         editText=findViewById(R.id.editText2);
         editText1=findViewById(R.id.editText3);
@@ -64,7 +66,7 @@ public class StartingAvtivity extends AppCompatActivity {
          }*/
         Random random=new Random();
 
-        int otp=random.nextInt(10000);
+        otp=random.nextInt(10000);
 
          button.setText("send otp");
         button.setOnClickListener(new View.OnClickListener() {
@@ -104,13 +106,14 @@ public class StartingAvtivity extends AppCompatActivity {
     }
     private void getRoom(){
         editText1.setVisibility(View.GONE);
-        button.setText("join");
+        startActivity(new Intent(StartingAvtivity.this,ConnectActivity.class).putExtra("room",""+otp));
+
+        /*button.setText("join");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(StartingAvtivity.this, "Joining room", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(StartingAvtivity.this,ConnectActivity.class).putExtra("room",String.valueOf(spinner.getSelectedItemId()+8798)));
             }
-        });
+        });*/
     }
 }

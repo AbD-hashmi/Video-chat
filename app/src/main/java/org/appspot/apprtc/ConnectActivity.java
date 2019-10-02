@@ -112,7 +112,7 @@ public class ConnectActivity extends Activity {
         finish();
 
         // If an implicit VIEW intent is launching the app, go directly to that URL.
-        final Intent intent = getIntent();
+       /* final Intent intent = getIntent();
         if ("android.intent.action.VIEW".equals(intent.getAction()) && !commandLineRun) {
             boolean loopback = intent.getBooleanExtra(CallActivity.EXTRA_LOOPBACK, false);
             int runTimeMs = intent.getIntExtra(CallActivity.EXTRA_RUNTIME, 0);
@@ -120,7 +120,7 @@ public class ConnectActivity extends Activity {
                     intent.getBooleanExtra(CallActivity.EXTRA_USE_VALUES_FROM_INTENT, false);
             String room = sharedPref.getString(keyprefRoom, "");
             connectToRoom(room, true, loopback, useValuesFromIntent, runTimeMs);
-        }
+        }*/
     }
 
     @Override

@@ -5,7 +5,37 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-    <uses-sdk android:targetSdkVersion="21" />
+    <application
+        android:allowBackup="false"
+        android:debuggable="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="false"
+        tools:ignore="HardcodedDebugMode">
+        <activity android:name=".ProfileActivity"></activity>
+        <activity
+            android:name=".StartingAvtivity"
+            android:theme="@style/Theme.AppCompat">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ConnectActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings_name" />
+        <activity
+            android:name=".CallActivity"
+            android:configChanges="orientation|smallestScreenSize|screenSize|screenLayout"
+            android:label="@string/app_name"
+            android:screenOrientation="fullUser"
+            android:theme="@style/CallActivityTheme" />
+    </application>
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -23,36 +53,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
 
-    <application
-        android:allowBackup="false"
-        android:debuggable="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:supportsRtl="false"
-        tools:ignore="HardcodedDebugMode">
-        <activity android:name=".StartingAvtivity"
-            android:theme="@style/Theme.AppCompat">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ConnectActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/settings_name"></activity>
-        <activity
-            android:name=".CallActivity"
-            android:configChanges="orientation|smallestScreenSize|screenSize|screenLayout"
-            android:label="@string/app_name"
-            android:screenOrientation="fullUser"
-            android:theme="@style/CallActivityTheme"></activity>
-    </application>
+    <uses-sdk android:targetSdkVersion="21" />
 
 </manifest>

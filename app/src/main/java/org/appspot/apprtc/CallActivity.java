@@ -13,7 +13,9 @@ package org.appspot.apprtc;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,12 +32,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.lang.RuntimeException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import org.appspot.apprtc.AppRTCAudioManager.AudioDevice;
@@ -79,7 +83,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
             System.loadLibrary("boringssl.cr");
             System.loadLibrary("protobuf_lite.cr");
         } catch (UnsatisfiedLinkError e) {
-            Logging.w(TAG, "Failed to load native dependencies: ", e);
+            Logging.w(TAG, "Failed to load native dependencies: "+e);
         }
     }
 
@@ -208,6 +212,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
     private CallFragment callFragment;
     private HudFragment hudFragment;
     private CpuMonitor cpuMonitor;
+    private ProgressDialog progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -226,11 +231,20 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
         signalingParameters = null;
 
         // Create UI controls.
+
+
         pipRenderer = findViewById(R.id.pip_video_view);
         fullscreenRenderer = findViewById(R.id.fullscreen_video_view);
         callFragment = new CallFragment();
         hudFragment = new HudFragment();
 
+
+        progressBar =new ProgressDialog(CallActivity.this);
+        progressBar.setTitle("Please wait..");
+        progressBar.setMessage("While we find you someone to chat with");
+        progressBar.setCancelable(false);
+        if (!isFinishing())
+        progressBar.show();
         // Show/hide call control fragment on view click.
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -616,6 +630,14 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
         });
     }
 
+   /* public void profile(){
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(callFragment);
+        startActivity(new Intent(CallActivity.this,ProfileActivity.class));
+        disconnect();
+    }*/
+
     // Should be called from UI thread
     private void callConnected() {
         final long delta = System.currentTimeMillis() - callStartedTimeMs;
@@ -675,11 +697,22 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
         finish();
     }
 
+
+    private void findNewRoom(){
+        Random random=new Random();
+        int room= random.nextInt(10);
+        startActivity(new Intent(CallActivity.this,ConnectActivity.class).putExtra("room","2345"+room ));
+        disconnect();
+    }
+
     private void disconnectWithErrorMessage(final String errorMessage) {
         if (commandLineRun || !activityRunning) {
             Log.e(TAG, "Critical error: " + errorMessage);
-            disconnect();
+            findNewRoom();
         } else {
+
+            findNewRoom();
+           /*
             new AlertDialog.Builder(this)
                     .setTitle(getText(R.string.channel_error_title))
                     .setMessage(errorMessage)
@@ -695,6 +728,7 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
                             })
                     .create()
                     .show();
+*/
         }
     }
 
@@ -802,7 +836,9 @@ public class CallActivity extends Activity implements AppRTCClient.SignalingEven
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
                 onConnectedToRoomInternal(params);
+            progressBar.dismiss();
             }
         });
     }

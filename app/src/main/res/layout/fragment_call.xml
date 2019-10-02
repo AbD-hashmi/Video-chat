@@ -3,7 +3,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayout">
 
     <TextView
         android:id="@+id/contact_name_call"
@@ -12,7 +13,60 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/buttons_call_container"
         android:textSize="24sp"
+        android:visibility="gone"
         android:layout_margin="8dp"/>
+
+
+    <ImageButton
+        android:id="@+id/button_profile"
+        android:background="@drawable/profile"
+        android:layout_marginStart="8dp"
+        android:onClick="profile"
+        android:layout_width="48dp"
+        android:layout_above="@+id/buttons_call_container"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentRight="false"
+        android:layout_height="48dp"/>
+
+    <ImageButton
+        android:id="@+id/button_gift"
+        android:background="@drawable/gift"
+        android:contentDescription="@string/switch_camera"
+        android:layout_marginEnd="8dp"
+        android:layout_width="48dp"
+        android:layout_above="@+id/buttons_call_container"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_height="48dp"/>
+
+
+    <ImageButton
+        android:id="@+id/button_call_switch_camera"
+        android:background="@android:drawable/ic_menu_camera"
+        android:contentDescription="@string/switch_camera"
+        android:layout_marginEnd="8dp"
+        android:layout_width="48dp"
+        android:layout_alignParentRight="false"
+        android:layout_height="48dp"/>
+
+    <ImageButton
+        android:id="@+id/button_mute"
+        android:background="@drawable/mute"
+        android:contentDescription="@string/switch_camera"
+        android:layout_marginEnd="8dp"
+        android:layout_width="48dp"
+        android:layout_alignParentRight="true"
+        android:layout_height="48dp"/>
+
+    <ImageButton
+        android:id="@+id/button_unmute"
+        android:background="@drawable/unmute"
+        android:contentDescription="@string/switch_camera"
+        android:layout_marginEnd="8dp"
+        android:layout_width="48dp"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_height="48dp"/>
 
     <LinearLayout
            android:id="@+id/buttons_call_container"
@@ -24,21 +78,6 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content">
 
-       <ImageButton
-           android:id="@+id/button_call_disconnect"
-           android:background="@drawable/disconnect"
-           android:contentDescription="@string/disconnect_call"
-           android:layout_marginEnd="16dp"
-           android:layout_width="48dp"
-           android:layout_height="48dp"/>
-
-       <ImageButton
-           android:id="@+id/button_call_switch_camera"
-           android:background="@android:drawable/ic_menu_camera"
-           android:contentDescription="@string/switch_camera"
-           android:layout_marginEnd="8dp"
-           android:layout_width="48dp"
-           android:layout_height="48dp"/>
 
         <ImageButton
            android:id="@+id/button_call_scaling_mode"
@@ -48,13 +87,46 @@
             android:visibility="gone"
            android:layout_height="48dp"/>
 
+        <ImageButton
+            android:id="@+id/button_report"
+            android:background="@drawable/report"
+            android:contentDescription="@string/disconnect_call"
+            android:layout_marginEnd="16dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"/>
+
+        <ImageButton
+            android:id="@+id/button_previous"
+            android:background="@drawable/heart"
+            android:contentDescription="@string/disconnect_call"
+            android:layout_marginStart="16dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"/>
+
        <ImageButton
            android:id="@+id/button_call_toggle_mic"
            android:background="@android:drawable/ic_btn_speak_now"
            android:contentDescription="@string/toggle_mic"
            android:layout_marginEnd="8dp"
+           android:layout_marginStart="8dp"
            android:layout_width="48dp"
            android:layout_height="48dp"/>
+
+        <ImageButton
+            android:id="@+id/button_next_room"
+            android:background="@drawable/like"
+            android:contentDescription="@string/disconnect_call"
+            android:layout_marginEnd="16dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"/>
+
+        <ImageButton
+            android:id="@+id/button_addfriend"
+            android:background="@drawable/addfriend"
+            android:contentDescription="@string/disconnect_call"
+            android:layout_marginStart="16dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"/>
     </LinearLayout>
 
     <TextView
@@ -64,6 +136,7 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/capture_format_slider_call"
         android:textSize="16sp"
+        android:visibility="gone"
         android:text="@string/capture_format_change_text"/>
 
     <SeekBar
@@ -73,6 +146,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:progress="50"
+        android:visibility="gone"
         android:layout_margin="8dp"/>
 
 </RelativeLayout>
